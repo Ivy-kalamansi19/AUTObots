@@ -15,10 +15,10 @@ module.exports.handleEvent = async ({ event, api }) => {
 
       // Kunin ang pangalan ng group chat
       const threadInfo = await api.getThreadInfo(event.threadID);
-      const groupName = threadInfo.threadName || "ang group chat";
+      const groupName = threadInfo.threadName || "𝗚𝗥𝗢𝗨𝗣 𝗖𝗛𝗔𝗧 ";
 
       // Pag-send ng leaving message
-      api.sendMessage(`Paalam, ${name}! Salamat sa pagsama sa ${groupName}.`, event.threadID);
+      api.sendMessage(`𝗚𝗼𝗼𝗱𝗯𝘆𝗲, ${name}! 𝗬𝗼𝘂’𝗹𝗹 𝗱𝗲𝗳𝗶𝗻𝗶𝘁𝗲𝗹𝘆 𝗯𝗲 𝗺𝗶𝘀𝘀𝗲𝗱! 😭 𝗪𝗲 𝗵𝗼𝗽𝗲 𝘁𝗼 𝘀𝗲𝗲 𝘆𝗼𝘂 𝗮𝗴𝗮𝗶𝗻 𝘀𝗼𝗼𝗻! 👋 𝗦𝘁𝗮𝘆 𝘀𝗮𝗳𝗲 𝗮𝗻𝗱 𝘁𝗮𝗸𝗲 𝗰𝗮𝗿𝗲! 🌟 From the Group🪦 ${groupName}.`, event.threadID);
 
       // Awtomatikong pag-readd kung gusto mo itong i-enable
       api.addUserToGroup(event.logMessageData?.leftParticipantFbId, event.threadID, (error) => {
@@ -35,14 +35,14 @@ module.exports.handleEvent = async ({ event, api }) => {
   if (event.logMessageType === 'log:subscribe') {
     if (event.logMessageData?.addedParticipants) {
       const threadInfo = await api.getThreadInfo(event.threadID);
-      const groupName = threadInfo.threadName || "ang group chat";
+      const groupName = threadInfo.threadName || "𝗚𝗥𝗢𝗨𝗣 𝗖𝗛𝗔𝗧";
 
       for (const participant of event.logMessageData.addedParticipants) {
         const info = await api.getUserInfo(participant.userFbId);
         const { name } = info[participant.userFbId];
 
         // Pag-send ng welcoming message
-        api.sendMessage(`Welcome sa ${groupName}, ${name}! Masaya kaming makasama ka.`, event.threadID);
+        api.sendMessage(`🎊𝗪𝗲𝗹𝗰𝗼𝗺𝗲 𝘁𝗼 𝘁𝗵𝗲 𝗴𝗿𝗼𝘂𝗽! 🌟 ${groupName}, ${name}!🥳 𝗪𝗲’𝗿𝗲 𝗴𝗹𝗮𝗱 𝘆𝗼𝘂 𝗷𝗼𝗶𝗻𝗲𝗱 𝘂𝘀! 🤩 𝗗𝗼𝗻’𝘁 𝗯𝗲 𝘀𝗵𝘆, 𝗳𝗲𝗲𝗹 𝗳𝗿𝗲𝗲 𝘁𝗼 𝗰𝗵𝗮𝘁! 💬.`, event.threadID);
       }
     }
   }
