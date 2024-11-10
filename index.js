@@ -4,6 +4,7 @@ const path = require('path');
 // Requiring the event handlers
 const handleWelcomeEvent = require('./script/event/welcome');
 const handleLeaveEvent = require('./script/event/leave');
+const handleAutoGreetEvent = require('./script/event/autogreet');
 
 const SCRIPT_FILE = "auto.js";
 const SCRIPT_PATH = path.join(__dirname, SCRIPT_FILE);
