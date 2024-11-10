@@ -4,7 +4,7 @@ module.exports.config = {
 };
 
 const greetingMessages = [
-  "🌞 **Good morning, rise and shine! Let’s make today count!** 🌟",  
+  "🌞 **Good day, rise and shine! Let’s make today count!** 🌟",  
 "🎉 **It’s a brand new hour! Let's keep the energy high!** 💥",  
 "🌈 **Hope you’re ready to shine bright today!** ✨",  
 "💪 **Time to crush those goals! You got this!** 🚀",  
