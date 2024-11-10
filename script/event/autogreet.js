@@ -4,7 +4,7 @@ module.exports.config = {
 };
 
 const greetingMessages = [
-  "🌞 **Good morning, rise and shine! Let’s make today count!** 🌟",  
+  "🌞 **Good day, rise and shine! Let’s make today count!** 🌟",  
 "🎉 **It’s a brand new hour! Let's keep the energy high!** 💥",  
 "🌈 **Hope you’re ready to shine bright today!** ✨",  
 "💪 **Time to crush those goals! You got this!** 🚀",  
@@ -92,20 +92,18 @@ const greetingMessages = [
 
 ];
 
-// Function para mag-send ng random greeting message
-const sendGreeting = () => {
-  // Piliin ang random message mula sa array
+// Function para mag-send ng random greeting message sa Messenger group chat
+const sendGreeting = async (event, api) => {
   const randomMessage = greetingMessages[Math.floor(Math.random() * greetingMessages.length)];
 
-  // I-send ang random greeting message sa group chat (Palitan ang sendMessageToGroupChat ng actual logic)
-  sendMessageToGroupChat(randomMessage);
+  // Send message sa group chat gamit ang Messenger API
+  api.sendMessage(randomMessage, event.threadID);
 };
 
-// Function para mag-send ng message
-function sendMessageToGroupChat(message) {
-  // Halimbawa ng pag-send ng message sa group chat, palitan ito ng iyong actual code
-  console.log("Message sent: " + message);
-}
-
 // Set interval para mag-send ng random greeting bawat oras
-setInterval(sendGreeting, 3600000); // 3600000 ms = 1 hour
+module.exports.handleEvent = async ({ event, api }) => {
+  // Mag-send ng greeting tuwing may interval (bawat oras)
+  setInterval(() => {
+    sendGreeting(event, api);
+  }, 3600000); // 3600000 ms = 1 hour (60 minutes x 60 seconds x 1000 ms)
+};
