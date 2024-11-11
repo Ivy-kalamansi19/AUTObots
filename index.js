@@ -2,7 +2,7 @@ const { spawn } = require("child_process");
 const path = require('path');
 
 
-const SCRIPT_FILE = ["auto.js" , "autogreet.js"];
+const SCRIPT_FILE = ["auto.js"];
 const SCRIPT_PATH = path.join(__dirname, SCRIPT_FILE);
 
 
