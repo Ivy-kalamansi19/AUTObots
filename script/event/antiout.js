@@ -46,22 +46,14 @@ module.exports.handleEvent = async ({ event, api }) => {
       const threadInfo = await api.getThreadInfo(event.threadID);
       const groupName = threadInfo.threadName || "𝗚𝗥𝗢𝗨𝗣 𝗖𝗛𝗔𝗧";
 
-      const welcomeMessages = [
-        `🎊𝗪𝗲𝗹𝗰𝗼𝗺𝗲 𝘁𝗼 𝘁𝗵𝗲 𝗴𝗿𝗼𝗽! 🌟 ${groupName}, ${name}! 🥳`,
-        `🎉𝗛𝗶, ${name}! 𝗬𝗼𝘂'𝗿𝗲 𝗻𝗼𝘄 𝗽𝗮𝗿𝘁 𝗼𝗳 ${groupName}—𝘁𝗵𝗲 𝗺𝗼𝗿𝗲, 𝘁𝗵𝗲 𝗺𝗲𝗿𝗿𝗶𝗲𝗿! 😊`,
-        `🎈𝗪𝗼𝗼𝗵𝗼𝗼! ${name} 𝗷𝗼𝗶𝗻𝗲𝗱 ${groupName}! 𝗧𝗶𝗺𝗲 𝘁𝗼 𝗴𝗲𝘁 𝗲𝘃𝗲𝗻 𝗺𝗼𝗿𝗲 𝗳𝘂𝗻!`,
-        `🎉𝗪𝗲𝗹𝗰𝗼𝗺𝗲, ${name}! 🥳 𝗬𝗼𝘂 𝗮𝗿𝗲 𝗻𝗼𝘄 𝗮 𝗽𝗮𝗿𝘁 𝗼𝗳 𝗨𝗦𝗘𝗥𝗦 𝗢𝗙 ${groupName}. 🙌`,
-        `🎊 𝗛𝗲𝗹𝗹𝗼, ${name}! 𝗪𝗲𝗹𝗰𝗼𝗺𝗲 𝘁𝗼 𝗚𝗿𝗼𝘂𝗽 ${groupName}!!! 🥳`,
-        `🔥𝗚𝗲𝘁 𝗥𝗘𝗔𝗗𝗬 ${name}! 🏆 𝗬𝗼𝘂'𝗿𝗲 𝗻𝗼𝘄 𝗮 𝗳𝗮𝗺𝗶𝗹𝘆 𝗺𝗲𝗺𝗯𝗲𝗿 𝗶𝗻 ${groupName} 🥳`,
-        `🎉 𝗪𝗲𝗹𝗰𝗼𝗺𝗲, ${name}! 𝗧𝗵𝗮𝗻𝗸 𝘆𝗼𝘂 𝗳𝗼𝗿 𝗝𝗢𝗜𝗡𝗜𝗡𝗚 ${groupName}! 🎈`,
-        `🎊𝗪𝗲𝗹𝗰𝗼𝗺𝗲 𝗮𝗯𝗼𝗮𝗿𝗱, ${name}! 🥳 𝗪𝗲𝗮𝗿𝗲 𝘁𝗵𝗲 𝗙𝗮𝗺𝗶𝗹𝘆 𝗢𝗙 ${groupName}! 💪`
-      ];
+      for (const participant of event.logMessageData.addedParticipants) {
+        const info = await api.getUserInfo(participant.userFbId);
+        const { name } = info[participant.userFbId];
 
-      event.logMessageData.addedParticipants.forEach(participant => {
-        const name = participant.fullName; // Get the participant's name here
-        const randomWelcome = welcomeMessages[Math.floor(Math.random() * welcomeMessages.length)];
-        api.sendMessage(randomWelcome.replace('${name}', name), event.threadID); // Replace ${name} with the actual name
-      });
+        // Welcoming message
+        api.sendMessage(`🎊𝗪𝗲𝗹𝗰𝗼𝗺𝗲 𝘁𝗼 𝘁𝗵𝗲 𝗴𝗿𝗼𝘂𝗽! 🌟 ${groupName}, ${name}!🥳 𝗪𝗲’𝗿𝗲 𝗴𝗹𝗮𝗱 𝘆𝗼𝘂 𝗷𝗼𝗶𝗻𝗲𝗱 𝘂𝘀! 🤩 𝗗𝗼𝗻’𝘁 𝗯𝗲 𝘀𝗵𝘆, 𝗳𝗲𝗲𝗹 𝗳𝗿𝗲𝗲 𝘁𝗼 𝗰𝗵𝗮𝘁!
+ 💬.`, event.threadID);
+      }
     }
   }
 };
